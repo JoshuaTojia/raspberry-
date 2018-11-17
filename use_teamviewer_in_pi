@@ -1,0 +1,62 @@
+步骤
+
+
+
+1. 下载树莓派处理器架构对应的TeamViewer
+
+
+  进入 https://www.teamviewer.com/en/download/linux.aspx 下载 teamviewer_linux_x64.deb
+
+
+
+
+wget http://download.teamviewer.com/download/linux/version_11x/teamviewer-host_armhf.deb
+sudo dpkg -i teamviewer-host_armhf.deb
+sudo apt-get -f install123
+
+
+
+2. 安装依赖包，解决依赖
+
+
+  Install gdebi (GDebi can install local .deb packages with automatic dependency resolution (it automatically downloads and installs the required packages).):
+
+
+
+
+sudo apt-get install gdebi1
+
+
+
+3. 通过gdebi安装TeamViewer
+
+
+
+sudo gdebi teamviewer_linux_x64.deb1
+
+
+
+4. 完成
+
+安装完成后可以通过桌面-系统菜单启动TeamViewer，进入TeamViewer并登陆你的TeamViewer账号，并将所使用的树莓派注册到TeamViewer。授权该树莓派允许访问TeamViewer设备，使能轻松访问功能。
+
+在UI界面输入用户名密码即可。
+
+
+
+5. 除了GUI方式启动TeamViewer，还可以使用命令行界面启动
+
+
+
+#查看帮助信息
+teamviewer help
+
+#查看本机ID
+teamviewer info
+
+#设置本机密码
+teamviewer passwd 1234567890
+--------------------- 
+作者：goni鹊桥猫仙 
+来源：CSDN 
+原文：https://blog.csdn.net/realdonaldtrump/article/details/79694196 
