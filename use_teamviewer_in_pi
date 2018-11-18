@@ -11,6 +11,7 @@
 
 
 wget http://download.teamviewer.com/download/linux/version_11x/teamviewer-host_armhf.deb
+(need vpn in China maybe!!!)
 sudo dpkg -i teamviewer-host_armhf.deb
 sudo apt-get -f install123
 
