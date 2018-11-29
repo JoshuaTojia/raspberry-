@@ -1,0 +1,34 @@
+首先安装SimpleCV：
+https://blog.csdn.net/plokday/article/details/80369886
+其中第一句命令：
+sudo apt-get install ipython python-opencv python-scipy python-numpy python-pygame python-setuptools git    
+后面加上 python-pip（不然无法使用pip指令）  :
+sudo apt-get install ipython python-opencv python-scipy python-numpy python-pygame python-setuptools python-pip
+ 
+缺啥补啥！！！
+例如：出现错误：no module named svgwrite
+那么就输入：sudo pip install svgwrite
+---------------------------------------------------------------------------------------------------------------
+再者安装Zbar:
+http://www.voidcn.com/article/p-urzbbigx-dw.html
+------------------------------------------------------------------------------------------------------------------
+For example:
+
+from SimpleCV import Color, Camera, Display
+from zbar
+cam = Camera()
+display = Display()
+message = "Last item scanned: "
+result = "None"
+while( display.isNotDone() ):    
+  img = cam.getImage()    
+  barcode = img.findBarcode()    
+  if( barcode is not None ):        
+    for s in barcode:            
+      result = str(s.data)    
+  img.drawText(message + result, color=Color.GREEN, fontsize=40)   
+  img.save(display)
+
+作者：河间老王 
+来源：CSDN 
+原文：https://blog.csdn.net/lingdongtianxia/article/details/52950468 
