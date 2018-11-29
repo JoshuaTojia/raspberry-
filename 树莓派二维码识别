@@ -12,6 +12,12 @@ sudo apt-get install ipython python-opencv python-scipy python-numpy python-pyga
 再者安装Zbar:
 http://www.voidcn.com/article/p-urzbbigx-dw.html
 ------------------------------------------------------------------------------------------------------------------
+最后如果是使用csi摄像头：
+https://blog.csdn.net/qq_38880380/article/details/78727809
+特别注意不要遗漏了最后面的：csi摄像头传感器节点设置
+当然如果是USB摄像头就不需要考虑。
+----------------------------------------------------------------------------------------------------------------
+
 For example:
 
 from SimpleCV import Color, Camera, Display
