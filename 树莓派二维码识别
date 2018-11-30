@@ -17,24 +17,70 @@ https://blog.csdn.net/qq_38880380/article/details/78727809
 特别注意不要遗漏了最后面的：csi摄像头传感器节点设置
 当然如果是USB摄像头就不需要考虑。
 ----------------------------------------------------------------------------------------------------------------
+安装：
+sudo apt-get install python-imaging
+sudo apt-get install zbar-tools
+sudo apt-get install qrencode
+sudo apt-get install python-pygame
 
-For example:
+代码：
+qrcode.py:
 
-from SimpleCV import Color, Camera, Display
-from zbar
-cam = Camera()
-display = Display()
-message = "Last item scanned: "
-result = "None"
-while( display.isNotDone() ):    
-  img = cam.getImage()    
-  barcode = img.findBarcode()    
-  if( barcode is not None ):        
-    for s in barcode:            
-      result = str(s.data)    
-  img.drawText(message + result, color=Color.GREEN, fontsize=40)   
-  img.save(display)
 
-作者：河间老王 
-来源：CSDN 
-原文：https://blog.csdn.net/lingdongtianxia/article/details/52950468 
+
+
+#!/usr/bin/env python
+#-*- coding: UTF-8 -*-
+import os,signal,subprocess
+
+strfile1 = "qrcode"
+
+def erzeugen():
+	text=raw_input(u"enter text QRcode:")
+	os.system("qrencode -o " + strfile1 + ".png '" + text + "'")
+	print u"QRcode in: " +strfile1+".png"
+
+def lesen():
+		os.system("raspistill -w 320 -h 240 -o /home/pi/cameraqr/image.jpg")
+		print u"raspistill finished"
+		#zbarcam=subprocess.Popen("zbarcam --raw --nodisplay /dev/video0", stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid)
+		#print u"zbarcam started successfully..."
+		#qrcodetext=zbarcam.stdout.readline()
+		zbarcam=subprocess.Popen("zbarimg --raw /home/pi/cameraqr/image.jpg", stdout=subprocess.PIPE, shell=True, preexec_fn=os.setsid)
+		qrcodetext=zbarcam.stdout.readline()
+		if qrcodetext!="":
+			print qrcodetext
+		else:
+			print u"qrcodetext is empty"
+
+		#os.killpg(zbarcam.pid, signal.SIGTERM)
+		print u"zbarcam stopped successfully..."
+		return u"QRCode:  "+qrcodetext
+  
+  
+  
+  
+  main.py:
+  
+  
+  
+  
+  #!/usr/bin/env python
+
+#-*- coding: UTF-8 -*-
+
+import qrcode
+
+while (True):
+    print u"1: qrcode create"
+    print u"2: qrcode identify"
+    print u"3: exit"
+    select=int(raw_input(u"please choose: "))
+    if select == 1:
+        qrcode.erzeugen()
+    elif select == 2:
+        result=qrcode.lesen().strip()
+        print result
+    elif select == 3:
+        print u"programme completed..."
+        break
